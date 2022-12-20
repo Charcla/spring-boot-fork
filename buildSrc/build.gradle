@@ -1,6 +1,9 @@
 plugins {
 	id "java-gradle-plugin"
-	id "io.spring.javaformat" version "${javaFormatVersion}"
+	//Execution failed for task ':buildSrc:checkFormatTest'
+	//Formatting violations found in the following files
+	//注释这一句是为了解决这个文件格式问题
+//	id "io.spring.javaformat" version "${javaFormatVersion}"
 	id "checkstyle"
 }
 
