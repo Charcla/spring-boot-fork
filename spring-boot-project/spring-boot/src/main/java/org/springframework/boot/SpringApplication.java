@@ -198,7 +198,7 @@ public class SpringApplication {
 	private Set<Class<?>> primarySources;
 
 	private Set<String> sources = new LinkedHashSet<>();
-
+	//当前启动项目的启动类
 	private Class<?> mainApplicationClass;
 
 	private Banner.Mode bannerMode = Banner.Mode.CONSOLE;
@@ -274,9 +274,10 @@ public class SpringApplication {
 
 
 
-
+		//去找到所有的ApplicationContextInitializer实现类，这个东西可以在spring容器刷新前，对spring上下文做一些操作
 		setInitializers((Collection) getSpringFactoriesInstances(ApplicationContextInitializer.class));
 		setListeners((Collection) getSpringFactoriesInstances(ApplicationListener.class));
+		//推断找出main方法所在的类，也就是springboot的启动类
 		this.mainApplicationClass = deduceMainApplicationClass();
 	}
 
@@ -305,7 +306,9 @@ public class SpringApplication {
 		StopWatch stopWatch = new StopWatch();
 		//记录应用的启动时间
 		stopWatch.start();
+		//初始化应用上下文
 		ConfigurableApplicationContext context = null;
+		//初始化异常报告集合
 		Collection<SpringBootExceptionReporter> exceptionReporters = new ArrayList<>();
 		configureHeadlessProperty();
 		//获取所有的运行时监听器
@@ -432,7 +435,9 @@ public class SpringApplication {
 	private <T> Collection<T> getSpringFactoriesInstances(Class<T> type, Class<?>[] parameterTypes, Object... args) {
 		ClassLoader classLoader = getClassLoader();
 		// Use names and ensure unique to protect against duplicates
+		//SpringFactoriesLoader.loadFactoryNames这个方法去扫描依赖包里面META-INF/spring.factories文件里面配置了所有type类型
 		Set<String> names = new LinkedHashSet<>(SpringFactoriesLoader.loadFactoryNames(type, classLoader));
+		//这一步骤是去实例化上面找到的这些bean，就是最普通的new出来
 		List<T> instances = createSpringFactoriesInstances(type, parameterTypes, classLoader, args, names);
 		AnnotationAwareOrderComparator.sort(instances);
 		return instances;
@@ -1231,7 +1236,7 @@ public class SpringApplication {
 	 * @param args the application arguments (usually passed from a Java main method)
 	 * @return the running {@link ApplicationContext}
 	 */
-	public static ConfigurableApplicationContext run(Class<?> primarySource, String... args) {
+                                                                                                                                                                                                                                                                           	public static ConfigurableApplicationContext run(Class<?> primarySource, String... args) {
 		return run(new Class<?>[] { primarySource }, args);
 	}
 
