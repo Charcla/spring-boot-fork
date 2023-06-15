@@ -313,6 +313,7 @@ public class SpringApplication {
 		configureHeadlessProperty();
 		//获取所有的运行时监听器
 		SpringApplicationRunListeners listeners = getRunListeners(args);
+		//监听器开始启动，这启动是此监听器的生命周期的最早的一个方法
 		listeners.starting();
 		try {
 			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
@@ -420,7 +421,7 @@ public class SpringApplication {
 		System.setProperty(SYSTEM_PROPERTY_JAVA_AWT_HEADLESS,
 				System.getProperty(SYSTEM_PROPERTY_JAVA_AWT_HEADLESS, Boolean.toString(this.headless)));
 	}
-
+	//去找到所有依赖中实现了 SpringApplicationRunListener接口的实现类
 	private SpringApplicationRunListeners getRunListeners(String[] args) {
 		Class<?>[] types = new Class<?>[] { SpringApplication.class, String[].class };
 		return new SpringApplicationRunListeners(logger,

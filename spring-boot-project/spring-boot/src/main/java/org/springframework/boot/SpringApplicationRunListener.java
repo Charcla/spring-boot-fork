@@ -32,12 +32,14 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
  * @author Dave Syer
  * @author Andy Wilkinson
  * @since 1.0.0
+ * 这个接口的作用是在springboot启动的过程中进行回调，来让用户在启动的各个流程中加入自己的逻辑，是一个扩展点
  */
 public interface SpringApplicationRunListener {
 
 	/**
 	 * Called immediately when the run method has first started. Can be used for very
 	 * early initialization.
+	 * 开始启动
 	 */
 	default void starting() {
 	}
@@ -46,6 +48,7 @@ public interface SpringApplicationRunListener {
 	 * Called once the environment has been prepared, but before the
 	 * {@link ApplicationContext} has been created.
 	 * @param environment the environment
+	 * 环境构建完成
 	 */
 	default void environmentPrepared(ConfigurableEnvironment environment) {
 	}
@@ -54,6 +57,7 @@ public interface SpringApplicationRunListener {
 	 * Called once the {@link ApplicationContext} has been created and prepared, but
 	 * before sources have been loaded.
 	 * @param context the application context
+	 * spring容器构建完成
 	 */
 	default void contextPrepared(ConfigurableApplicationContext context) {
 	}
@@ -62,6 +66,7 @@ public interface SpringApplicationRunListener {
 	 * Called once the application context has been loaded but before it has been
 	 * refreshed.
 	 * @param context the application context
+	 * spring容器加载完成
 	 */
 	default void contextLoaded(ConfigurableApplicationContext context) {
 	}
@@ -72,6 +77,7 @@ public interface SpringApplicationRunListener {
 	 * ApplicationRunners} have not been called.
 	 * @param context the application context.
 	 * @since 2.0.0
+	 * spring容器启动
 	 */
 	default void started(ConfigurableApplicationContext context) {
 	}
@@ -82,6 +88,7 @@ public interface SpringApplicationRunListener {
 	 * {@link ApplicationRunner ApplicationRunners} have been called.
 	 * @param context the application context.
 	 * @since 2.0.0
+	 * spring容器启动完成
 	 */
 	default void running(ConfigurableApplicationContext context) {
 	}
@@ -92,6 +99,7 @@ public interface SpringApplicationRunListener {
 	 * the context was created
 	 * @param exception the failure
 	 * @since 2.0.0
+	 * spring容器启动失败
 	 */
 	default void failed(ConfigurableApplicationContext context, Throwable exception) {
 	}
