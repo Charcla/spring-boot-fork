@@ -39,7 +39,7 @@ public interface SpringApplicationRunListener {
 	/**
 	 * Called immediately when the run method has first started. Can be used for very
 	 * early initialization.
-	 * 开始启动
+	 * 刚执行run方法的时候
 	 */
 	default void starting() {
 	}

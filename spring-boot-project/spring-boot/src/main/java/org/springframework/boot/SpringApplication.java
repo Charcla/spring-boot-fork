@@ -314,6 +314,7 @@ public class SpringApplication {
 		//获取所有的运行时监听器
 		SpringApplicationRunListeners listeners = getRunListeners(args);
 		//监听器开始启动，这启动是此监听器的生命周期的最早的一个方法
+		//这里默认就只有一个EventPublishingRunListener
 		listeners.starting();
 		try {
 			ApplicationArguments applicationArguments = new DefaultApplicationArguments(args);
@@ -348,6 +349,7 @@ public class SpringApplication {
 		return context;
 	}
 
+	//主要是准备一些配置文件信息，根据应用类型，创建应用环境：如得到系统的参数、JVM 及 Servlet 等参数
 	private ConfigurableEnvironment prepareEnvironment(SpringApplicationRunListeners listeners,
 			ApplicationArguments applicationArguments) {
 		// Create and configure the environment
